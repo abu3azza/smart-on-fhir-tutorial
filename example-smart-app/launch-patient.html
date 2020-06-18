@@ -32,17 +32,31 @@
     //   'scope':  'patient/Patient.read patient/Observation.read launch/patient online_access openid profile'
     // });
     const queryString = window.location.search;
-    alert("QueryString:"+queryString);
+    console.log("QueryString:"+queryString);
     const urlParams = new URLSearchParams(queryString);
-    alert("urlParams:"+urlParams);
-    alert(urlParams.get('clientId'));
+    console.log("urlParams:"+urlParams);
+    console.log(urlParams.get('clientId'));
+
+    var clientId = '1e0c27a3-c100-48ee-ba9f-fae2f141085b';
+
+    if(urlParams.get('clientId')){
+      alert("Got Different ClientID from URL params");
+      clientId=urlParams.get('clientId')
+      alert("ClientID is now "+clientId);
+    } else {
+      alert("using Default:"+ clientId);
+    
+    }
+    let whatYouSay = prompt("Please say waht you want");
+      alert("You Said"+ whatYouSay);
+
     // if (URLSearchParams.get("clientId")) {
     //   alert("clientId" + URLSearchParams.get("clientId"));
     // } else {
     //   alert("Nothing Either");
     // }
     FHIR.oauth2.authorize({
-      'client_id': '1e0c27a3-c100-48ee-ba9f-fae2f141085b',
+      'client_id': clientId,
       'scope': 'patient/Patient.read patient/Observation.read launch/patient online_access openid profile'
     });
   </script>
