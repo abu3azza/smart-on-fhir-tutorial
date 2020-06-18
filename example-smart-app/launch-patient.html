@@ -31,8 +31,11 @@
     //   'client_id': '1e0c27a3-c100-48ee-ba9f-fae2f141085b',
     //   'scope':  'patient/Patient.read patient/Observation.read launch/patient online_access openid profile'
     // });
-
-    alert(URLSearchParams.length);
+    const queryString = window.location.search;
+    alert("QueryString:"+queryString);
+    const urlParams = new URLSearchParams(queryString);
+    alert("urlParams:"+urlParams);
+    alert(urlParams.get(clientId));
     // if (URLSearchParams.get("clientId")) {
     //   alert("clientId" + URLSearchParams.get("clientId"));
     // } else {
