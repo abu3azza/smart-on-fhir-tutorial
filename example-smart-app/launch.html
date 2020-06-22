@@ -31,10 +31,55 @@
       //   'scope':  'patient/Patient.read patient/Observation.read launch online_access openid profile'
       // });
       //=================Epic=================
-      FHIR.oauth2.authorize({
-        'client_id': 'efcd89d8-c760-496c-a2fa-b83166bf329e',
-        'scope':  'patient/Patient.read patient/Observation.read launch online_access openid profile'
-      });
+      const queryString = window.location.search;
+    console.log("QueryString:"+queryString);
+    const urlParams = new URLSearchParams(queryString);
+    console.log("urlParams:"+urlParams);
+    console.log(urlParams.get('clientId'));
+
+    var clientId = '1e0c27a3-c100-48ee-ba9f-fae2f141085b';
+
+    if(urlParams.get('clientId')){
+      alert("Got Different ClientID from URL params");
+      clientId=urlParams.get('clientId')
+      alert("ClientID is now "+clientId);
+    } else {
+      let newClientId = prompt("Please put your clientId if any!");
+      if (newClientId != null){
+          clientId = newClientId;
+        alert("CLient ID changed to "+ newClientId);
+      } else {
+        alert("will user default client ID "+ clientId);
+      }
+    
+    }
+    var scope = 'patient/Patient.read patient/Observation.read launch/patient online_access openid profile';
+// patient/Patient.read patient/Observation.read launch/patient offline_access openid profile
+    if(urlParams.get('myScope')){
+      alert("Got Different Scope from URL params");
+      scope=urlParams.get('myScope')
+      alert("Scope is now "+scope);
+    } else {
+      let newScope = prompt("Please put your Scope if any!");
+      if (newScope != null){
+        scope = newScope;
+        alert("Scope ID changed to "+ newScope);
+      } else {
+        alert("will user default scope  "+ scope);
+      }
+    
+    }
+    
+
+    // if (URLSearchParams.get("clientId")) {
+    //   alert("clientId" + URLSearchParams.get("clientId"));
+    // } else {
+    //   alert("Nothing Either");
+    // }
+    FHIR.oauth2.authorize({
+      'client_id': clientId,
+      'scope': scope
+    });
     </script>
     <div class="spinner">
       <div class="bounce1"></div>
